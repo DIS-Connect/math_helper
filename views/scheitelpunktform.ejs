@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include templates/head.ejs%>
+
+</head>
+<body>
+
+<div class="center">
+
+
+    <br>
+    ------ Scheitelpunktform ------
+    <br>
+
+
+    <br>
+    Gib die Funktion an.
+    <br>
+    <br>
+
+<input class="scheitelinput" id="xhoch2">X² +
+    <input class="scheitelinput" id="xhoch1">X +
+    <input class="scheitelinput" id="xhoch0">
+    <button onclick="calculate()" class="calculate ">BERECHNEN</button>
+    <br>
+    <br>
+    <input type="text" id="result" class="center">
+    <br>
+    <br><br>
+    <div class="check">
+        Du hast eine andere Funktion raus? Überprüfe <button><a onclick="check()" style="color: #3260bc">hier</a></button> ob deine Funktion mit der Lösung übereinstimmt
+    </div>
+
+</div>
+<script>
+
+    var term ="";
+    $(".check").hide();
+    function calculate() {
+        if (document.getElementById("xhoch2").value === "") {
+        alert("X² darf nicht leer sein!")
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/calculate/scheitel',
+                data: {
+                    "xhoch2": document.getElementById("xhoch2").value + "",
+                    "xhoch1": document.getElementById("xhoch1").value + "",
+                    "xhoch0": document.getElementById("xhoch0").value + ""
+                },
+                success: (data) => {
+
+                    document.getElementById("result").value = data;
+
+
+                },
+                error: (err) => {
+                    console.log('Fehler aufgetreten: ', err);
+                }
+            });
+        }
+
+    }
+
+    $(".mathbutton").click(function(){
+        $("#mathterm").focus();
+
+    });
+
+    function add(elem){
+        document.getElementById("mathterm").value  += elem.innerText;
+    }
+    function check(){
+        window.location = "/vergleicher?term="+term+""
+    }
+
+    function weg(){
+        document.getElementById("mathterm").value = document.getElementById("mathterm").value.substring(0, document.getElementById("mathterm").value.length - 1);
+
+    }
+</script>
+
+<a href="/impressum">Impressum</a>
+</body>
+</html>

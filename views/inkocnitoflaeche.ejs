@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include templates/head.ejs%>
+
+
+</head>
+<body style="background-color: black">
+
+<div class="center inko">
+    <br><br>
+    Das bestimmte Integral der Funktion:<br>
+    <input type="text" id="result" class="center result inko" ><br><br>
+    Fläche zwischen der X-Achse und der Funktion:<br>
+    <input type="text" id="result2" class="center result inko" >
+
+    <br><br>
+    <button onclick="calculate()" class="calculate ">BERECHNEN</button>
+    <br><br>
+
+   bis:  <input type="text" id="intervalend" class="inko" style="width: 15%; text-align: center"><br>
+    von: <input type="text" id="intervalstart" class="inko" style="width: 15%; text-align: center; margin-top:20px"> <br>
+
+    <input type="text" id="mathterm" class="inko"><button onclick="weg()"><-</button>
+    <br>
+
+    <div class="buttons inko">
+        <button class="mathbutton" onclick="add(this)">+</button>
+        <button class="mathbutton" onclick="add(this)">-</button>
+        <button class="mathbutton" onclick="add(this)">*</button>
+        <button class="mathbutton" onclick="add(this)">/</button>
+        <button class="mathbutton" onclick="add(this)">^</button>
+        <button class="mathbutton" onclick="add(this)">x</button><br>
+        <button class="mathbutton" onclick="add(this)">(</button>
+        <button class="mathbutton" onclick="add(this)">)</button>
+        <button class="mathbutton" onclick="add(this)">,</button>
+        <button class="mathbutton smaller" onclick="add(this)">sin</button>
+        <button class="mathbutton smaller" onclick="add(this)">cos</button>
+        <button class="mathbutton smaller" onclick="add(this)">tan</button>
+        <br>
+
+
+    </div>
+
+
+
+  <br><br>
+    <a href="/impressum">Impressum</a>
+
+</div>
+<script>
+    function calculate() {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/calculate/flaeche',
+            data: {"func":document.getElementById("mathterm").value +"", "start":document.getElementById("intervalstart").value +"","end":document.getElementById("intervalend").value +"" },
+            success: (data) => {
+
+                document.getElementById("result").value = data;
+                console.log(data);
+            },
+            error: (err) =>{
+                console.log('Fehler aufgetreten: ', err);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/calculate/flaeche2',
+            data: {"func":document.getElementById("mathterm").value +"", "start":document.getElementById("intervalstart").value +"","end":document.getElementById("intervalend").value +"" },
+            success: (data) => {
+
+                document.getElementById("result2").value = data;
+            },
+            error: (err) =>{
+                console.log('Fehler aufgetreten: ', err);
+            }
+        });
+    }
+
+
+    $(".mathbutton").click(function(){
+        $("#mathterm").focus();
+
+    });
+
+    function add(elem){
+        document.getElementById("mathterm").value  += elem.innerText;
+    }
+    function weg(){
+        document.getElementById("mathterm").value = document.getElementById("mathterm").value.substring(0, document.getElementById("mathterm").value.length - 1);
+
+    }
+
+</script>
+</body>
+</html>

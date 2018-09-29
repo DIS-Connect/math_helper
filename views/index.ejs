@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <% include templates/head.ejs%>
+  </head>
+
+
+
+  <body>
+  <div class="center">
+
+
+
+    <h1><h1><%= title %></h1></h1>
+
+      <div class="card">
+    <form action="/login" method="post">
+   <h2 style="color: gray">Klicke einfach auf Login!</h2>
+    <input type="password" name="password" class="input"></br><br>
+      <div class="card-action"><button class="button">Login</button></div>
+    </form>
+<br>
+         <p> Wenn du noch kein Passwort hast. Trage <a href="/invite">hier</a> dein Invitecode ein um dir eins zu erstellen.</p>
+      </div>
+  </div>
+
+
+  <script>
+      $(document).keypress(function (e) {
+          if (e.which === 13) $('form').submit();
+      });
+  </script>
+  <a href="/impressum">Impressum</a>
+  </body>
+</html>

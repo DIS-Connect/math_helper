@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<% include templates/head.ejs%>
+
+
+
+
+</head>
+<body>
+
+<div class="center">
+
+    <br>
+    <br>
+    ------ Der Termvergleicher ------
+    <br>
+
+    <br>
+    Gib den 1. Term an.
+    <br>
+    <br>
+    <input type="text" id="mathterm" ><button onclick="weg()"><-</button>
+    <br>
+    <div class="buttons">
+        <button class="mathbutton" onclick="add(this)">+</button>
+        <button class="mathbutton" onclick="add(this)">-</button>
+        <button class="mathbutton" onclick="add(this)">*</button>
+        <button class="mathbutton" onclick="add(this)">/</button>
+        <button class="mathbutton" onclick="add(this)">^</button>
+        <button class="mathbutton" onclick="add(this)">x</button><br>
+        <button class="mathbutton" onclick="add(this)">(</button>
+        <button class="mathbutton" onclick="add(this)">)</button>
+        <button class="mathbutton" onclick="add(this)">,</button>
+        <button class="mathbutton smaller" onclick="add(this)">sin</button>
+        <button class="mathbutton smaller" onclick="add(this)">cos</button>
+        <button class="mathbutton smaller" onclick="add(this)">tan</button>
+        <br>
+
+
+    </div>
+<br>
+    Gib den 2. Term an.
+    <br>
+    <br>
+    <input type="text" id="mathterm2" ><button onclick="weg2()"><-</button>
+    <br>
+    <div class="buttons">
+        <button class="mathbutton2" onclick="add2(this)">+</button>
+        <button class="mathbutton2" onclick="add2(this)">-</button>
+        <button class="mathbutton2" onclick="add2(this)">*</button>
+        <button class="mathbutton2" onclick="add2(this)">/</button>
+        <button class="mathbutton2" onclick="add2(this)">^</button>
+        <button class="mathbutton2" onclick="add2(this)">x</button><br>
+        <button class="mathbutton2" onclick="add2(this)">(</button>
+        <button class="mathbutton2" onclick="add2(this)">)</button>
+        <button class="mathbutton2" onclick="add2(this)">,</button>
+        <button class="mathbutton2 smaller" onclick="add2(this)">sin</button>
+        <button class="mathbutton2 smaller" onclick="add2(this)">cos</button>
+        <button class="mathbutton2 smaller" onclick="add2(this)">tan</button>
+        <br>
+
+
+    </div>
+    <button onclick="calculate()" class="calculate ">VERGLEICHEN</button>
+    <br>
+    <br>
+    <input type="text" id="result" class="center"><br>
+    <br>
+    Kontrollergebnisse:<br>
+    Term1: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Term2:<br>
+    <input style=" margin-right:10%;" id="term1"><input style="margin-left:10%;" id="term2"><br><br>
+    <input style=" margin-right:10%;" id="ergeb1"><input style="margin-left:10%;" id="ergeb2">
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<script>
+    var term;
+    $(document).ready(function(){
+
+        term = getParameterByName("term");
+        document.getElementById("mathterm").value = term;
+
+
+        if(term === null){
+
+        }else{
+        $("#mathterm2").focus();
+        }
+
+
+    });
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2]);
+    }
+
+
+    function calculate() {
+        console.log("hasdasgdiasd");
+        $.ajax({
+            type: 'POST',
+            url: '/calculate/vergleichen',
+            data: {"term1":document.getElementById("mathterm").value +"","term2":document.getElementById("mathterm2").value +"" },
+            success: (data) => {
+
+                document.getElementById("result").value = data.ergebnis;
+                document.getElementById("term1").value = data.term1;
+                document.getElementById("term2").value = data.term2;
+                document.getElementById("ergeb1").value = data.ergeb1;
+                document.getElementById("ergeb2").value = data.ergeb2;
+            },
+            error: (err) =>{
+                console.log('Fehler aufgetreten: ', err);
+            }
+        });
+    }
+
+
+    $(".mathbutton2").click(function(){
+        $("#mathterm2").focus();
+    });
+
+    $(".mathbutton").click(function(){
+        $("#mathterm").focus();
+
+    });
+
+    function add(elem){
+        document.getElementById("mathterm").value  += elem.innerText;
+    }
+
+    function add2(elem){
+        document.getElementById("mathterm2").value  += elem.innerText;
+    }
+    function weg(){
+        document.getElementById("mathterm").value = document.getElementById("mathterm").value.substring(0, document.getElementById("mathterm").value.length - 1);
+
+    }
+    function weg2(){
+        document.getElementById("mathterm2").value = document.getElementById("mathterm2").value.substring(0, document.getElementById("mathterm2").value.length - 1);
+
+    }
+</script>
+<a href="/impressum">Impressum</a>
+</body>
+</html>

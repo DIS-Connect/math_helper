@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+
+
+<body>
+<div class="center">
+
+
+
+    <h1><h1><%= title %></h1></h1>
+
+    <div class="card">
+        <form action="/login" method="post">
+            <h2 style="color: gray">Gib dein Invitecode hier ein:</h2>
+            <input type="password" name="password" class="input"></br><br>
+            <div class="card-action"><button class="button">Einlösen</button></div>
+        </form>
+        <br>
+        <p> Wenn du deinen Invitecode bereits eingelöst hast und dir ein Passwort erstellt hast, kannsz du dich  <a href="/">hier</a> einloggen.</p>
+    </div>
+</div>
+
+
+<script>
+    $(document).keypress(function (e) {
+        if (e.which === 13) $('form').submit();
+    });
+</script>
+<a href="/impressum">Impressum</a>
+</body>
+</html>

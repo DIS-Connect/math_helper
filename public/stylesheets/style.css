@@ -1,0 +1,116 @@
+
+
+
+.center{
+  text-align: center;
+}
+
+.scheitelinput{
+    width:20px;
+}
+.heading{
+  font-family: Arial;
+  font-size: 200%;
+   color: #10203f;
+border-bottom: black solid 2px;
+  position: relative;
+  top:0;
+}
+
+.card{
+  margin:auto;
+  width:80%;
+
+  border: lightgray 1px solid;
+padding:5%;
+}
+.button{
+  padding: 10px 30px;
+  background-color: #426ac9;
+  color: white;
+  border: none;
+}
+
+.input{
+
+}
+
+.buttons{
+width:80%;
+  margin:auto;
+  vertical-align: center;
+}
+
+.mathbutton{
+  font-size: 130%;
+  margin:auto;
+  margin-top: 15px;
+  width:40px;
+  height:30px;
+  vertical-align: middle;
+  line-height: 100%;
+  border:black solid 1px;
+}
+
+.mathbutton2{
+    font-size: 130%;
+    margin:auto;
+    margin-top: 15px;
+    width:40px;
+    height:30px;
+    vertical-align: middle;
+    line-height: 100%;
+    border:black solid 1px;
+}
+
+.inbutton{
+  display: inline-block;
+  margin: auto;
+}
+
+#mathterm{
+  width:60%;
+}
+
+#mathterm2{
+  width:60%;
+}
+
+.calculate{
+  position: relative;
+  top:15px;
+  margin:auto;
+  margin-top: 5%;
+padding:12px;
+  height:30%;
+  vertical-align: middle;
+  line-height: 100%;
+  border:black solid 1px;
+}
+
+.smaller{
+    font-size: 120%;
+}
+
+.result{
+    position: relative;
+    top:15px;
+    width: 75%
+}
+.inko{
+    color: lightgray;
+    background-color: black;
+}
+
+#term1, #term2, #ergeb1, #ergeb2{
+    width: 30%;
+}
+
+@media (min-width:500px){
+    #mathterm, #mathterm2,.result {
+        width: 400px;}
+    #term1, #term2, #ergeb1, #ergeb2{
+        width:120px;
+    }
+
+}
