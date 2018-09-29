@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include templates/head.ejs%>
+
+</head>
+<body>
+
+<div class="center">
+
+
+    <br>
+    ------ Der Tlaisgduzvasuvdr ------
+    <br>
+
+    <br>
+    Gib die Gleichungen an.
+    <br>
+    <br>
+    <input type="text" id="mathterm" ><button onclick="weg()"><-</button>
+    <br>
+
+    <br><br>
+    Nach welcher Variable soll aufgelöst werden?<br>
+    <input type="text" id="variable" >
+    <br><br>
+    <button onclick="calculate()" class="calculate ">LÖSEN</button>
+    <br>
+    <br><br>
+    Lösung:<br>
+    <input type="text" id="result" class="center"><br><br>
+
+    <br><br><br>
+
+    <a href="/impressum">Impressum</a>
+</div>
+<script>
+    var term ="";
+    $(".check").hide();
+
+
+    function calculate() {
+
+        $.ajax({
+            type: 'POST',
+            url: '/calculate/gleichung',
+            data: {"func":document.getElementById("mathterm").value +"","variable":document.getElementById("variable").value +""},
+            success: (data) => {
+
+                document.getElementById("result").value = data;
+
+                console.log(data);
+
+
+            },
+            error: (err) =>{
+                console.log('Fehler aufgetreten: ', err);
+            }
+        });
+    }
+
+
+
+
+
+    $(".mathbutton").click(function(){
+        $("#mathterm").focus();
+
+    });
+
+    function add(elem){
+        document.getElementById("mathterm").value  += elem.innerText;
+    }
+
+
+
+    function weg(){
+        document.getElementById("mathterm").value = document.getElementById("mathterm").value.substring(0, document.getElementById("mathterm").value.length - 1);
+
+    }
+</script>
+
+</body>
+</html>

@@ -19,6 +19,7 @@ var vergleicherRouter = require('./routes/vergleicher');
 var impressumRouter = require('./routes/impressum');
 var infoRouter = require('./routes/info');
 var scheitelRouter = require('./routes/scheitelpunktform');
+var rekonstruktionRouter = require('./routes/rekonstruktion');
 var nullstellenRouter = require('./routes/nullstellen');
 var gleichungenRouter = require('./routes/gleichungen');
 
@@ -54,7 +55,8 @@ MongoClient.connect(url, function (err, mongoClient) {
     app.use('/flaeche', flaecheRouter);
     app.use('/ableiten', ableitenRouter);
     app.use('/vereinfacher', vereinfacherRouter);
-    app.use('/vergleicher', vergleicherRouter);
+    app.use('/vereinfacher', vereinfacherRouter);
+    app.use('/rekonstruktion', rekonstruktionRouter);
     app.use('/info', infoRouter);
     app.use('/impressum', impressumRouter);
     app.use('/scheitelpunktform', scheitelRouter);
