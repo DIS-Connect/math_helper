@@ -23,6 +23,13 @@ router.post('/integrate', function (req, res) {
     res.send(x);
 });
 
+router.post('/rekonstruieren', function (req, res) {
+
+
+
+    res.send("Pups");
+});
+
 
 
 router.post('/flaeche', function (req, res) {

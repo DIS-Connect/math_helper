@@ -11,19 +11,31 @@
 
 
     <br>
-    ------ Der Tlaisgduzvasuvdr ------
+    ------ Rekonstruktion ------
     <br>
 
     <br>
-    Gib die Gleichungen an.
-    <br>
-    <br>
-    <input type="text" id="mathterm" ><button onclick="weg()"><-</button>
-    <br>
 
-    <br><br>
-    Nach welcher Variable soll aufgelöst werden?<br>
-    <input type="text" id="variable" >
+    <br>
+    <br>
+    <input type="text" class="matrix">a
+    <input type="text" class="matrix">b
+    <input type="text" class="matrix">c =
+    <input type="text" class="matrix"><br><br>
+
+    <input type="text" class="matrix">a
+    <input type="text" class="matrix">b
+    <input type="text" class="matrix">c =
+    <input type="text" class="matrix"><br><br>
+
+    <input type="text" class="matrix">a
+    <input type="text" class="matrix">b
+    <input type="text" class="matrix">c =
+    <input type="text" class="matrix"><br><br>
+
+
+
+
     <br><br>
     <button onclick="calculate()" class="calculate ">LÖSEN</button>
     <br>
@@ -44,13 +56,12 @@
 
         $.ajax({
             type: 'POST',
-            url: '/calculate/gleichung',
-            data: {"func":document.getElementById("mathterm").value +"","variable":document.getElementById("variable").value +""},
+            url: '/calculate/rekonstruieren',
+            data: {},
             success: (data) => {
 
                 document.getElementById("result").value = data;
 
-                console.log(data);
 
 
             },
@@ -61,24 +72,6 @@
     }
 
 
-
-
-
-    $(".mathbutton").click(function(){
-        $("#mathterm").focus();
-
-    });
-
-    function add(elem){
-        document.getElementById("mathterm").value  += elem.innerText;
-    }
-
-
-
-    function weg(){
-        document.getElementById("mathterm").value = document.getElementById("mathterm").value.substring(0, document.getElementById("mathterm").value.length - 1);
-
-    }
 </script>
 
 </body>
